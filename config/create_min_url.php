@@ -9,23 +9,9 @@
  * @email		mike@mikefunk.com
  *
  * @file		create_min_url.php
- * @version		1.0.1
+ * @version		1.1.0
  * @date		8/16/12
  */
-
-// --------------------------------------------------------------------------
-
-/**
- * path to your css files, with trailing slash relative to application root.
- */
-$config['css_path'] = 'assets/styles/';
-
-// --------------------------------------------------------------------------
-
-/**
- * path to your js files, with trailing slash relative to application root.
- */
-$config['js_path'] = 'assets/scripts/';
 
 // --------------------------------------------------------------------------
 

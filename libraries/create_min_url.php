@@ -9,7 +9,7 @@
  * @email		mike@mikefunk.com
  *
  * @file		create_min_url.php
- * @version		1.0.1
+ * @version		1.1.0
  * @date		8/16/12
  */
 
@@ -59,62 +59,14 @@ class create_min_url
 	 * assemble css url.
 	 * 
 	 * @access public
-	 * @param mixed $styles either an array or a string of css filenames.
-	 * @param string $css_path (default: '') an optional full path to the css dir.
+	 * @param mixed $paths either an array or a string of css filenames.
 	 * @return string the complete path
 	 */
-	public function css($styles, $css_path = '')
+	public function css($paths)
 	{
-		$this->_ci->load->helper('url');
-		
-		// convert string to array, check for empty array
-		if (gettype($styles) == 'string')
-		{
-			$styles = array($styles);
-		}
-		
-		if (empty($styles))
-		{
-			return false;
-		}
-		
 		$return = '<link type="text/css" rel="stylesheet" href="';
-		
-		// use config css path or passed one
-		$css_path = ($css_path == '' ? $this->_ci->config->item('css_path') : $css_path);
-		
-		// set base url
-		$return .= base_url() . $this->_ci->config->item('min_path');
-		
-		// set directory portion
-		if (count($styles) > 1)
-		{
-			$return .= 'b=' . preg_replace('/\/$/', '', $css_path) . '&f=';
-		}
-		else
-		{
-			$return .= 'f=' . $css_path;
-		}
-		
-		// loop through styles
-		$i = 0;
-		foreach ($styles as $item)
-		{
-			$i++;
-			
-			// comma separate multiples
-			$post = ',';
-			if ($i == count($styles) || count($styles) == 1)
-			{
-				$post = '';
-			}
-			
-			// assemble return
-			$return .= $item . $post;
-		}
-		
+		$return .= $this->_create_url($paths);
 		$return .= '" />';
-		
 		return $return;
 	}
 	
@@ -124,61 +76,53 @@ class create_min_url
 	 * assemble js url.
 	 * 
 	 * @access public
-	 * @param mixed $styles either an array or a string of js filenames.
-	 * @param string $js_path (default: '') an optional full path to the js dir.
+	 * @param mixed $paths either an array or a string of js filenames.
 	 * @return string the complete path
 	 */
-	public function js($styles, $js_path = '')
+	public function js($paths)
+	{
+		$return = '<script type="text/javascript" src="';
+		$return .= $this->_create_url($paths);
+		$return .= '"></script>';
+		return $return;
+	}
+	
+	// --------------------------------------------------------------------------
+	
+	/**
+	 * return a finished google minify url.
+	 * 
+	 * @access private
+	 * @param mixed $paths can be an array or string
+	 * @return string
+	 */
+	private function _create_url($paths)
 	{
 		$this->_ci->load->helper('url');
 		
 		// convert string to array, check for empty array
-		if (gettype($styles) == 'string')
+		if (gettype($paths) == 'string')
 		{
-			$styles = array($styles);
+			$paths = array($paths);
 		}
 		
-		if (empty($styles))
+		if (empty($paths))
 		{
 			return false;
 		}
 		
-		$return = '<script type="text/javascript" src="';
-		
-		// use config js path or passed one
-		$js_path = ($js_path == '' ? $this->_ci->config->item('js_path') : $js_path);
-		
 		// set base url
-		$return .= base_url() . $this->_ci->config->item('min_path');
+		$return .= base_url() . $this->_ci->config->item('min_path') . '?f=';
 		
-		// set directory portion
-		if (count($styles) > 1)
-		{
-			$return .= 'b=' . preg_replace('/\/$/', '', $js_path) . '&f=';
-		}
-		else
-		{
-			$return .= 'f=' . $js_path;
-		}
-		
-		// loop through styles
-		$i = 0;
-		foreach ($styles as $item)
-		{
-			$i++;
-			
-			// comma separate multiples
-			$post = ',';
-			if ($i == count($styles) || count($styles) == 1)
-			{
-				$post = '';
-			}
-			
+		// loop through paths
+		foreach ($paths as $item)
+		{	
 			// assemble return
-			$return .= $item . $post;
+			$return .= $item . ',';
 		}
 		
-		$return .= '"></script>';
+		// trim last comma
+		$return = substr($return, 0, -1);
 		
 		return $return;
 	}

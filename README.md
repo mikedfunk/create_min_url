@@ -19,33 +19,32 @@ Load Spark
 
 Echo a minify URL in the view
 
-	<?=$this->create_min_url->css('file_name.css')?>
-	<?=$this->create_min_url->js('file_name.js')?>
+	<?=$this->create_min_url->css('path/to/file_name.css')?>
+	<?=$this->create_min_url->js('path/to/file_name.js')?>
 
 Echo a combined, minified, and cached group in the view.
 
-	<?=$this->create_min_url->css(array('test.css', 'test2.css'))?>
-	<?=$this->create_min_url->js(array('test.js', 'test2.js'))?>
-    
-Ignore the default path and use your own
-
-    <?=$this->create_min_url->css('file_name.css', '/my/custom/path/to/file/')?>
+	<?=$this->create_min_url->css(array('path/to/test.css', 'other/path/to/test2.css'))?>
+	<?=$this->create_min_url->js(array('path/to/test.js', 'other/path/to/test2.js'))?>
     
 Keep in mind:
 
-* Don't include the full path to your file in the first parameter. Just the file name and extension. The path is determined by the config file or overridden by a custom file path in the second parameter.
-* If you have files in different folders, echo a group for each folder. For instance if you have CSS in ```assets/js/cool_slider/css/cool_slider.css``` and the rest in ```assets/css```, echo separate groups for each.
-
+* Be sure to include the full path to each file relative from the CodeIgniter project root.
 
 ----------------------------
 
 Changelog
 ----------------------------
 
+**1.1.0**
+
+* Simplified to require entire path to file relative to CI project root. This allows for all css or all js to be minified to one file, although it makes for longer URLs.
+* Removed css path, js path config variables.
+
 **1.0.1**
 
-* Added ```rel="stylesheet"``` to css link
-* Changed &amp; in URL to &
+* Added ```rel="stylesheet"``` to css link.
+* Changed &amp; in URL to &.
 
 **1.0.0**
 

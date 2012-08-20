@@ -78,7 +78,7 @@ class create_min_url
 			return false;
 		}
 		
-		$return = '<link type="text/css" href="';
+		$return = '<link type="text/css" rel="stylesheet" href="';
 		
 		// use config css path or passed one
 		$css_path = ($css_path == '' ? $this->_ci->config->item('css_path') : $css_path);
@@ -89,7 +89,7 @@ class create_min_url
 		// set directory portion
 		if (count($styles) > 1)
 		{
-			$return .= 'b=' . preg_replace('/\/$/', '', $css_path) . '&amp;f=';
+			$return .= 'b=' . preg_replace('/\/$/', '', $css_path) . '&f=';
 		}
 		else
 		{
@@ -154,7 +154,7 @@ class create_min_url
 		// set directory portion
 		if (count($styles) > 1)
 		{
-			$return .= 'b=' . preg_replace('/\/$/', '', $js_path) . '&amp;f=';
+			$return .= 'b=' . preg_replace('/\/$/', '', $js_path) . '&f=';
 		}
 		else
 		{

@@ -36,6 +36,10 @@ Keep in mind:
 Changelog
 ----------------------------
 
+**1.1.1**
+
+* Fixed tiny bug in return variable
+
 **1.1.0**
 
 * Simplified to require entire path to file relative to CI project root. This allows for all css or all js to be minified to one file, although it makes for longer URLs.

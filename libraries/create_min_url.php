@@ -111,6 +111,8 @@ class create_min_url
 			return false;
 		}
 		
+		$return = '';
+		
 		// set base url
 		$return .= base_url() . $this->_ci->config->item('min_path') . '?f=';
 		

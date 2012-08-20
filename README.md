@@ -42,6 +42,11 @@ Keep in mind:
 Changelog
 ----------------------------
 
+**1.0.1**
+
+* Added ```rel="stylesheet"``` to css link
+* Changed &amp; in URL to &
+
 **1.0.0**
 
 * Initial Release

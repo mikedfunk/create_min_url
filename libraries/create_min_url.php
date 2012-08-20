@@ -9,7 +9,7 @@
  * @email		mike@mikefunk.com
  *
  * @file		create_min_url.php
- * @version		1.1.0
+ * @version		1.1.1
  * @date		8/16/12
  */
 
